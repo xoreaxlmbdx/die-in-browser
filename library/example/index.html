@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="libv86.js"></script>
+    <script src="index.js"></script>
+    <script src="die.js"></script>
+</head>
+
+<body>
+    <!-- Loading -->
+    <div id="loading"></div>
+    <!-- Main section -->
+    <div id="main" style="display: none;">
+        <hr>
+
+        <!-- Example 1 -->
+
+        <h2>Run command in emulator</h2>
+        <input id="commandInput">
+        <button id="commandRunBtn">Run</button><br>
+        <textarea readonly id="commandOutput" rows="10" cols="50"></textarea><br>
+        For <code>ls</code> you can use <code>ls --color=never</code>
+
+        <hr>
+
+        <!-- Example 2 -->
+
+        <h2>Run <code>diec</code> command</h2>
+        diec <input id="diecInput" placeholder="--help">
+        <button id="diecRunBtn">Run</button><br>
+        <textarea readonly id="diecOutput" rows="10" cols="50"></textarea><br>
+
+        <hr>
+
+        <!-- Example 3 -->
+
+        <h2>Full analysis</h2>
+        <h3>Select file and analysis starts</h3>
+        <input type="file" id="fileInput">
+
+        <label>
+            <input type="checkbox" id="opt-recursive">
+            Recursive scan
+        </label>
+        <label>
+            <input type="checkbox" id="opt-deep" checked>
+            Deep scan
+        </label>
+        <label>
+            <input type="checkbox" id="opt-heuristic" checked>
+            Heuristic scan
+        </label>
+        <label>
+            <input type="checkbox" id="opt-aggressive" checked>
+            Aggressive scan
+        </label>
+        <label>
+            <input type="checkbox" id="opt-alltypes">
+            All types
+        </label>
+
+        <hr>
+
+        <div id="analysesResults">
+            
+        </div>
+    </div>
+</body>
+
+</html>
