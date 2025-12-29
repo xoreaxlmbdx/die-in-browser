@@ -19,7 +19,7 @@ To run this demo locally, your directory must contain the following files:
 
 ## How to Run
 
-The easiest way to run this example is to serve it with a local HTTP server:
+The easiest way to run this demo is to serve it with a local HTTP server:
 
 ```bash
 npx serve

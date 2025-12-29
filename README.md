@@ -32,6 +32,8 @@ powerful static binary analyzer — entirely inside your browser using the
 
 👉 **[Live Demo](https://die-in-browser.deno.dev)**
 
+📂 **[Source Code](demo)** – demo source code
+
 > ⚠️ Everything runs in your browser — the initial load includes a ~25 MB
 > emulator state file. Also, large binaries may take longer to analyze.
 
