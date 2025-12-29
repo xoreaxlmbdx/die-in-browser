@@ -1,0 +1,122 @@
+<!doctype html>
+
+<html>
+
+<head>
+    <script src="libv86.js"></script>
+    <script src="main.js"></script>
+    <script src="renderer.js"></script>
+    <script src="die.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="styles.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/light.min.css">
+</head>
+
+<body>
+    <h1><a href="https://github.com/xoreaxlmbdx/die-in-browser">die-in-browser</a></h1>
+    <hr>
+    <h2 id="emulator-download-progress" style="text-align: center;"></h2>
+
+    <!-- Upload section -->
+    <div id="upload-section" style="opacity: 0.5; pointer-events: none;">
+        <label id="drop-zone">
+            Drop any binary file here (EXE, ELF, DLL, etc.)
+            <input type="file" id="file-input" accept="*/*" disabled />
+        </label>
+        <hr>
+        <div style="text-align: center;">
+            <label>
+                <input type="checkbox" id="opt-recursive">
+                Recursive scan
+            </label>
+            <label>
+                <input type="checkbox" id="opt-deep" checked>
+                Deep scan
+            </label>
+            <label>
+                <input type="checkbox" id="opt-heuristic" checked>
+                Heuristic scan
+            </label>
+            <label>
+                <input type="checkbox" id="opt-aggressive" checked>
+                Aggressive scan
+            </label>
+            <label>
+                <input type="checkbox" id="opt-alltypes">
+                All types
+            </label>
+            <p style="color: #888; font-size: 0.85em; margin-top: 0.8em;">
+                ⚠️ "All Types" + "Recursive" may cause long scans.
+            </p>
+        </div>
+    </div>
+
+    <div id="screen_container">
+        <div style="white-space: pre; font: 14px monospace;"></div>
+        <canvas style="display: none"></canvas>
+    </div>
+
+    <!-- Analysis section -->
+    <div id="analysis-section" style="display: none;">
+        <h2 id="file-name" style="text-align: center;"></h2>
+
+        <div id="timer" style="text-align: center; margin-bottom: 1.5em; color: #666; font-size: 0.9em;">
+            Elapsed: <span id="elapsed-time">0</span>s
+        </div>
+
+        <div class="stage">
+            <h3>Detects:</h3>
+            <div id="detects-content">
+                <div class="spinner"></div>
+            </div>
+        </div>
+
+        <div class="stage">
+            <h3>Info:</h3>
+            <div id="info-content">
+                <div class="spinner"></div>
+            </div>
+        </div>
+
+        <div class="stage">
+            <h3>Hashes:</h3>
+            <div id="hashes-content">
+                <div class="spinner"></div>
+            </div>
+        </div>
+
+        <div class="stage">
+            <h3>Entropy:</h3>
+            <div id="entropy-content">
+                <div class="spinner"></div>
+            </div>
+        </div>
+
+        <div class="stage">
+            <h3>Strings:</h3>
+            <div id="strings-content">
+                <div class="spinner"></div>
+            </div>
+        </div>
+
+        <div class="stage" id="entrypoint-stage">
+            <h3>Entry point:</h3>
+            <div id="entrypoint-content">
+                <div class="spinner"></div>
+            </div>
+        </div>
+
+        <div class="stage" id="sections-stage">
+            <h3>Sections:</h3>
+            <div id="sections-content">
+                <div class="spinner"></div>
+            </div>
+        </div>
+
+        <button id="again-btn" style="display: none; margin: 2em auto 0 auto;">
+            Analyze another
+        </button>
+    </div>
+</body>
+
+</html>

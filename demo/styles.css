@@ -1,0 +1,55 @@
+#drop-zone {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 75%;
+    max-width: 100%;
+    height: 200px;
+    padding: 1.5em;
+    border: 2px dashed #888888;
+    border-radius: 12px;
+    color: #666666;
+    background-color: #fafafa;
+    cursor: pointer;
+    margin: auto;
+    text-align: center;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+#drop-zone:hover {
+    background-color: #f0f0f0;
+    border-color: #555555;
+}
+
+#file-input {
+    display: none;
+}
+
+.spinner {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border: 2px solid #ccc;
+    border-top-color: #666;
+    border-radius: 50%;
+    animation: spinner-rotate 1s linear infinite;
+    margin-right: 8px;
+    vertical-align: middle;
+}
+
+@keyframes spinner-rotate {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.stage {
+    margin-bottom: 1.5em;
+    padding-bottom: 1em;
+    border-bottom: 1px solid #eee;
+}
+
+.stage:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
