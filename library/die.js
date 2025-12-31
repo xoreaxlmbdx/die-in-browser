@@ -1,5 +1,6 @@
 class DIEInBrowser {
     static SHARED_FILE_NAME = "file.bin";
+    static DIE_BASE_COMMAND = "./run_diec.sh -C db_extra";
 
     constructor(config) {
         // Creating emulator
@@ -47,7 +48,7 @@ class DIEInBrowser {
     analyzeAdditionalInfo(path, methodsList, callback) {
         // Entry point (PE)
         if (methodsList.includes("IMAGE_NT_HEADERS")) {
-            this.runCommand(`./run_diec.sh ${path} -j -S "IMAGE_NT_HEADERS"`, imageNtHeaders => {
+            this.runCommand(`${DIEInBrowser.DIE_BASE_COMMAND} ${path} -j -S "IMAGE_NT_HEADERS"`, imageNtHeaders => {
                 try {
                     imageNtHeaders = JSON.parse(imageNtHeaders);
                     let baseAddress = "", entrypoint = "";
@@ -70,7 +71,7 @@ class DIEInBrowser {
                 callback("entrypoint", imageNtHeaders);
                 // Sections (PE)
                 if (methodsList.includes("IMAGE_SECTION_HEADER")) {
-                    this.runCommand(`./run_diec.sh ${path} -j -S "IMAGE_SECTION_HEADER"`, imageSectionHeader => {
+                    this.runCommand(`${DIEInBrowser.DIE_BASE_COMMAND} ${path} -j -S "IMAGE_SECTION_HEADER"`, imageSectionHeader => {
                         try {
                             imageSectionHeader = JSON.parse(imageSectionHeader);
                         } catch (e) {
@@ -87,7 +88,7 @@ class DIEInBrowser {
 
         // Entry point (ELF)
         if (methodsList.includes("Elf_Ehdr")) {
-            this.runCommand(`./run_diec.sh ${path} -j -S "Elf_Ehdr"`, elfEhdr => {
+            this.runCommand(`${DIEInBrowser.DIE_BASE_COMMAND} ${path} -j -S "Elf_Ehdr"`, elfEhdr => {
                 try {
                     elfEhdr = JSON.parse(elfEhdr);
                     if (elfEhdr?.data?.Elf_Ehdr?.entry) {
@@ -108,7 +109,7 @@ class DIEInBrowser {
 
     analyzeFile(path, flags, callback) {
         // Finds additional diec methods
-        this.runCommand(`./run_diec.sh ${path} -m`, methodsRaw => {
+        this.runCommand(`${DIEInBrowser.DIE_BASE_COMMAND} ${path} -m`, methodsRaw => {
             const methodsList = methodsRaw.split("\n").slice(5).map(s => s.trim());
 
             // If there are no sections in file (only in PE format)
@@ -121,7 +122,7 @@ class DIEInBrowser {
             }
 
             // Detects
-            this.runCommand(`./run_diec.sh -bj${flags} ${path}`, detects => {
+            this.runCommand(`${DIEInBrowser.DIE_BASE_COMMAND} -bj${flags} ${path}`, detects => {
                 try {
                     detects = JSON.parse(detects.slice(detects.indexOf("{")).trimStart());
                 } catch (e) {
@@ -133,7 +134,7 @@ class DIEInBrowser {
                 callback("detects", detects);
 
                 // Info
-                this.runCommand(`./run_diec.sh -ij ${path}`, info => {
+                this.runCommand(`${DIEInBrowser.DIE_BASE_COMMAND} -ij ${path}`, info => {
                     try {
                         info = JSON.parse(info);
                     } catch (e) {
@@ -145,7 +146,7 @@ class DIEInBrowser {
                     callback("info", info);
 
                     // Hashes
-                    this.runCommand(`./run_diec.sh -j -S "Hash" ${path}`, hashes => {
+                    this.runCommand(`${DIEInBrowser.DIE_BASE_COMMAND} -j -S "Hash" ${path}`, hashes => {
                         try {
                             hashes = JSON.parse(hashes);
                         } catch (e) {
@@ -157,7 +158,7 @@ class DIEInBrowser {
                         callback("hashes", hashes);
 
                         // Entropy
-                        this.runCommand(`./run_diec.sh -j -S "Entropy" ${path}`, entropy => {
+                        this.runCommand(`${DIEInBrowser.DIE_BASE_COMMAND} -j -S "Entropy" ${path}`, entropy => {
                             try {
                                 entropy = JSON.parse(entropy);
                             } catch (e) {
