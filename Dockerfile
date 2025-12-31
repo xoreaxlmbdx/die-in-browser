@@ -11,11 +11,12 @@ RUN apt-get update && \
         git \
         lsb-release \
         wget \
+        unzip \
         build-essential && \
     rm -rf /var/lib/apt/lists/*
 
-# Clones DIE
-RUN git clone --recursive --branch 3.10 https://github.com/horsicq/DIE-engine.git
+# Clones latest DIE
+RUN git clone --recursive https://github.com/horsicq/DIE-engine.git
 
 WORKDIR /DIE-engine
 
@@ -27,8 +28,15 @@ RUN test -f build/release/diec
 RUN mkdir /build && \
     cp build/release/diec /build/diec && \
     ldd /build/diec | awk 'NF == 4 { system("cp " $3 " /build") }' && \
-    rm /build/libc.so.6 /build/libpthread.so.0 /build/libdl.so.2 /build/libgcc_s.so.1 /build/libm.so.6 && \
-    cp -r Detect-It-Easy/db Detect-It-Easy/db_extra /build
+    rm /build/libc.so.6 /build/libpthread.so.0 /build/libdl.so.2 /build/libgcc_s.so.1 /build/libm.so.6
+
+# Download databases
+RUN wget -c -P /build \
+    https://github.com/horsicq/Detect-It-Easy/releases/download/current-database/db.zip \
+    https://github.com/horsicq/Detect-It-Easy/releases/download/current-database/db_extra.zip && \
+    unzip /build/db.zip -d /build && \
+    unzip /build/db_extra.zip -d /build && \
+    rm /build/db.zip /build/db_extra.zip
 
 COPY scripts/run_diec.sh /build
 
