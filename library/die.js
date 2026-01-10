@@ -73,7 +73,7 @@ class DIEInBrowser {
                 if (methodsList.includes("IMAGE_SECTION_HEADER")) {
                     this.runCommand(`${DIEInBrowser.DIE_BASE_COMMAND} ${path} -j -S "IMAGE_SECTION_HEADER"`, imageSectionHeader => {
                         try {
-                            imageSectionHeader = JSON.parse(imageSectionHeader);
+                            imageSectionHeader = JSON.parse(imageSectionHeader.slice(imageSectionHeader.indexOf("{")).trimStart());
                         } catch (e) {
                             imageSectionHeader = {
                                 error: String(e),

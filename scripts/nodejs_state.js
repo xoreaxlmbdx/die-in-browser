@@ -24,7 +24,7 @@ let serial_text = "";
 let booted = false;
 
 // Listening for serial output
-emulator.add_listener("serial0-output-byte", function(byte) {
+emulator.add_listener("serial0-output-byte", function (byte) {
     const c = String.fromCharCode(byte);
     process.stdout.write(c);
 
@@ -41,8 +41,8 @@ emulator.add_listener("serial0-output-byte", function(byte) {
         setTimeout(async function () {
             const s = await emulator.save_state();
 
-            fs.writeFile("./buildroot-state.bin", new Uint8Array(s), function(e) {
-                if(e) throw e;
+            fs.writeFile("./buildroot-state.bin", new Uint8Array(s), function (e) {
+                if (e) throw e;
                 console.log("Saved");
                 emulator.destroy();
             });

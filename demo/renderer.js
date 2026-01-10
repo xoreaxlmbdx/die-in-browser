@@ -1,3 +1,4 @@
+
 // Escapes HTML
 function escapeHtml(text) {
     return text
@@ -151,17 +152,17 @@ function renderStrings(strings, container) {
     container.appendChild(stringsDiv);
 
     const genHTML = (list) => {
-        let html = `<div style="max-height: 500px; overflow: auto;"><table><tr>
+        let html = `<div style="max-height: 500px; overflow: auto;"><table><thead><tr>
         <th>#</th>
         <th>Offset</th>
         <th>String</th>
-        </tr>`;
+        </tr></thead><tbody>`;
         list.forEach(s => {
             if (s) {
                 html += `<tr> <td>${s.index}</td> <td><code>${s.offset}</code></td> <td>${escapeHtml(s.str)}</td> </tr>`;
             }
         });
-        return html + `</table></div>`
+        return html + `</tbody></table></div>`
     }
 
     stringsDiv.innerHTML = genHTML(strings);
@@ -192,7 +193,7 @@ function sectionCharacteristicToString(value) {
 // Generates HTML for sections
 function renderSections(sections) {
     if (sections?.data?.IMAGE_SECTION_HEADER) {
-        let html = `<table><tr>
+        let html = `<table><thead><tr>
         <th>#</th>
         <th>Name</th>
         <th>Relative address</th>
@@ -200,7 +201,7 @@ function renderSections(sections) {
         <th>File offset</th>
         <th>Size</th>
         <th>Flags</th>
-        </tr>`;
+        </tr></thead><tbody>`;
         Object.entries(sections.data.IMAGE_SECTION_HEADER).forEach(([key, value]) => {
             html += `<tr>
             <td>${key}</td>
@@ -212,7 +213,7 @@ function renderSections(sections) {
             <td>${sectionCharacteristicToString(parseInt(value.Characteristics, 16))}</td>
             </tr>`;
         });
-        return html + `</table>`;
+        return html + `</tbody></table>`;
     }
     return JSON.stringify(sections);
 }
