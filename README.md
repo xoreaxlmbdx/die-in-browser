@@ -24,7 +24,7 @@ powerful static binary analyzer — entirely inside your browser using the
   guest OS;
 - [**v86**](https://github.com/copy/v86) – x86 emulator in
   JavaScript/WebAssembly;
-- [**Detect It Easy 3.10 (`diec`)**](https://github.com/horsicq/Detect-It-Easy)
+- [**Detect It Easy 3.2.0 (`diec`)**](https://github.com/horsicq/Detect-It-Easy)
   – console version of DIE for headless analysis;
 - **Docker** – for reproducible builds;
 
