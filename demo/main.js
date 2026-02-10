@@ -152,6 +152,7 @@ window.onload = () => {
     document.getElementById("again-btn").onclick = () => {
         analysisSection.style.display = "none";
         uploadSection.style.display = "block";
+        document.getElementById("again-btn").style.display = "none";
         document.getElementById("detects-content").innerHTML = spinner;
         document.getElementById("info-content").innerHTML = spinner;
         document.getElementById("hashes-content").innerHTML = spinner;
