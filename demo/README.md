@@ -1,8 +1,5 @@
 # Demo website
 
-This is the exact frontend used at
-[https://die-in-browser.deno.dev](https://die-in-browser.deno.dev).
-
 **All analysis happens locally in your browser — no files are ever sent to a
 server.**
 
@@ -13,7 +10,7 @@ To run this demo locally, your directory must contain the following files:
 - `v86.wasm`
 - `seabios.bin`
 - `vgabios.bin`
-- `v86state.bin.zst`
+- `v86state.zst`
 
 > 💡 These files are placed in the same directory as `index.html`.
 

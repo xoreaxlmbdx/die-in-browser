@@ -30,7 +30,7 @@ powerful static binary analyzer — entirely inside your browser using the
 
 ## 🚀 Try it now
 
-👉 **[Live Demo](https://die-in-browser.deno.dev)**
+👉 **[Live Demo](https://xoreaxlmbdx.github.io/die-in-browser)**
 
 📂 **[Source Code](demo)** – demo source code
 

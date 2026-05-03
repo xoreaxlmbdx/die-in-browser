@@ -60,8 +60,8 @@ function analyzeFileTemplateWithCallback(fileName) {
         entropyStage = document.getElementById("entropy-content"),
         stringsStage = document.getElementById("strings-content"),
         entrypointStage = document.getElementById("entrypoint-content"),
-        sectionsStage = document.getElementById("sections-content"); 
-    
+        sectionsStage = document.getElementById("sections-content");
+
     document.getElementById("file-name").textContent = fileName;
 
     uploadSection.style.display = "none";
@@ -172,7 +172,7 @@ window.onload = () => {
             url: "vgabios.bin",
         },
         initial_state: {
-            url: "v86state.bin.zst"
+            url: "v86state.zst"
         },
     });
 
