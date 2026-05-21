@@ -41,6 +41,8 @@ jobs:
           curl -L -o ./demo/seabios.bin https://github.com/xoreaxlmbdx/die-in-browser/releases/download/1.2.0/seabios.bin
           curl -L -o ./demo/v86.wasm https://github.com/xoreaxlmbdx/die-in-browser/releases/download/1.2.0/v86.wasm
           curl -L -o ./demo/v86state.bin.zst https://github.com/xoreaxlmbdx/die-in-browser/releases/download/1.2.0/v86state.bin.zst
+
+          gzip -9 ./demo/v86.wasm
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v5
         with:

@@ -230,21 +230,24 @@ window.onload = () => {
     };
 
     // Loads files
-    load_file("v86.wasm", {
+    load_file("v86.wasm.gz", {
         done: wasmBytes => {
             load_file("seabios.bin", {
                 done: biosBytes => {
                     load_file("v86state.bin.zst", {
                         done: stateBytes => {
-                            emulatorDownloadProgress.style.display = "none";
-                            uploadSection.style.opacity = "1";
-                            uploadSection.style.pointerEvents = "auto";
-                            fileInput.disabled = false;
-                            setupUpload();
+                            // Decompressing v86.wasm
+                            decompressBytesGzip(wasmBytes).then(wasmBytes => {
+                                emulatorDownloadProgress.style.display = "none";
+                                uploadSection.style.opacity = "1";
+                                uploadSection.style.pointerEvents = "auto";
+                                fileInput.disabled = false;
+                                setupUpload();
 
-                            biosArrayBuffer = biosBytes;
-                            stateArrayBuffer = stateBytes;
-                            wasmArrayBuffer = wasmBytes;
+                                biosArrayBuffer = biosBytes;
+                                stateArrayBuffer = stateBytes;
+                                wasmArrayBuffer = wasmBytes;
+                            });
                         },
                         progress: showDownloadProgress
                     })

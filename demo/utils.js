@@ -124,3 +124,10 @@ function formatBytes(bytes) {
         return `${mb.toFixed(2)} MB`;
     }
 }
+
+async function decompressBytesGzip(bytes) {
+    const blob = new Blob([bytes]);
+    const ds = new DecompressionStream("gzip");
+    const decompressedStream = blob.stream().pipeThrough(ds);
+    return await (await new Response(decompressedStream).blob()).bytes();
+}
